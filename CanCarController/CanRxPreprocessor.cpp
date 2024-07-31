@@ -4,6 +4,7 @@ Name:           CanRxPreprocessor
 Version:        1.0.0
 Date:           24.7.31
 Developer:      Rededge
+Desc:           Process the CAN RX and store them in cache
 
 */
 
@@ -20,9 +21,9 @@ Developer:      Rededge
 #include <sys/socket.h>
 #include <linux/can.h>
 #include <linux/can/raw.h>
-#include "pid.hpp"
 #include <termio.h>
 #include <thread>
+#include <errno.h>
 
 int rxcheck;
 int reccheck();
@@ -47,11 +48,12 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    strcpy(ifr.ifr_name, "vcan0"); // 指定名字
+    strcpy(ifr.ifr_name, "can0"); // 指定名字，注意改掉名字
 
     if (ioctl(sockfd, SIOCGIFINDEX, &ifr) == -1)
     {
         std::cerr << "Failed to get CAN interface index" << std::endl;
+        printf("%s\n",strerror(errno));
         close(sockfd);
         return 1;
     }
@@ -85,21 +87,22 @@ int main()
         }
         if (rxflag == 0)
         {
-            printf("Rx can msg from unknown device. Count %d. \n", count_f);
+            printf("Rx Can msg from unknown device. Count %d. \n", count_f);
             count_f++;
         }
         rxflag = 0;
         printf("Current cached can signal \n");
 
-        for (int i = 0; i < 8; i += 1)
-        {
-            printf("rx_frame[%d]=   ", i);
-            for (int j = 0; j < rec_frame.can_dlc; ++j)
-            {
-                printf("0x%02X ", rx_frame[i].data[j]);
-            }
-            printf("\n");
-        }
+        // RX cache display
+        // for (int i = 0; i < 8; i += 1)
+        // {
+        //     printf("rx_frame[%d]=   ", i);
+        //     for (int j = 0; j < rec_frame.can_dlc; ++j)
+        //     {
+        //         printf("0x%02X ", rx_frame[i].data[j]);
+        //     }
+        //     printf("\n");
+        // }
     }
 }
 
