@@ -13,8 +13,6 @@
 #include <linux/can/raw.h>
 #include "pid.hpp"
 #include <termio.h>
-#include <stdio.h>
-#include <unistd.h>
 #include <thread>
 
 using namespace std;
