@@ -21,6 +21,7 @@ char tx_tmp[8] = {0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00};
 int txflag = 0;
 int count_s = 0;
 int count_f = 0;
+canTxProcessor canTx;
 // Systick sYstick;
 
 // int main()

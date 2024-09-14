@@ -28,6 +28,7 @@ Desc:           Provide ms timetick from beginning of programme; class declared;
 
 //     return 0;
 // }
+Systick sYstick;
 
 void Systick::init_tick()
 {
