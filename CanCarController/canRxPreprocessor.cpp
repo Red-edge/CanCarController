@@ -19,7 +19,7 @@ int rxflag = 0;
 int count_s = 0;
 int count_f = 0;
 int Lasttick = 0;
-canRxPreprocessor canRx;
+// canRxPreprocessor canRx;
 
 int canRxPreprocessor::reccheck()
 {
@@ -38,6 +38,9 @@ int canRxPreprocessor::reccheck()
 
 int main()
 {
+    // Systick sYstick;
+    // canTxProcessor canTx;
+    // canRxPreprocessor canRx;
 
     sockfd = socket(PF_CAN, SOCK_RAW, CAN_RAW);
     if (0 > socket(PF_CAN, SOCK_RAW, CAN_RAW))

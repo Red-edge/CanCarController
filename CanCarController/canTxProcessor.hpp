@@ -34,7 +34,7 @@ public:
     uint64_t Lasttick = 0;
 };
 
-// canTxProcessor canTx;
+canTxProcessor canTx;
 
 canTxProcessor::canTxProcessor(/* args */)
 {

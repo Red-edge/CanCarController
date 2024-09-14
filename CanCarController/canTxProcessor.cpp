@@ -21,7 +21,7 @@ char tx_tmp[8] = {0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00};
 int txflag = 0;
 int count_s = 0;
 int count_f = 0;
-canTxProcessor canTx;
+// canTxProcessor canTx;
 // Systick sYstick;
 
 // int main()
@@ -75,37 +75,37 @@ int canTxProcessor::init_canTx()
 
     return 0;
 }
-    // sYstick.init_tick();
-    // Lasttick = sYstick.gettick();
+// sYstick.init_tick();
+// Lasttick = sYstick.gettick();
 
-    // while (1)
-    // {
-    //     if ((sYstick.gettick() - Lasttick) >= sYstick.motorfrate) // 数字单位为ms
-    //     {
-    //         txcheck = write(sockfd, &tx_frame, sizeof(tx_frame));
-    //         if (txcheck == -1)
-    //         {
-    //             std::cerr << "Failed to send CAN message" << std::endl;
-    //             printf("%s\n", strerror(errno));
-    //             close(sockfd);
-    //             return 1;
-    //         }
-    //         Lasttick = sYstick.gettick();
-    //         // cout << "Inside success. Lasttick as " << Lasttick << endl;
+// while (1)
+// {
+//     if ((sYstick.gettick() - Lasttick) >= sYstick.motorfrate) // 数字单位为ms
+//     {
+//         txcheck = write(sockfd, &tx_frame, sizeof(tx_frame));
+//         if (txcheck == -1)
+//         {
+//             std::cerr << "Failed to send CAN message" << std::endl;
+//             printf("%s\n", strerror(errno));
+//             close(sockfd);
+//             return 1;
+//         }
+//         Lasttick = sYstick.gettick();
+//         // cout << "Inside success. Lasttick as " << Lasttick << endl;
 
-    //         for (int i = 0; i < 8; i += 1)
-    //         {
-    //             printf("rx_frame[%d]=   ", i);
-    //             for (int j = 0; j < canRx.rec_frame.can_dlc; ++j)
-    //             {
-    //                 printf("0x%02X ", canRx.rx_frame[i].data[j]);
-    //             }
-    //             printf("\n");
-    //         }
-    //     }
-    //     // Lasttick = sYstick.gettick();
-    //     // cout << "Outside success. Lasttick as " << Lasttick << endl;
-    // }
+//         for (int i = 0; i < 8; i += 1)
+//         {
+//             printf("rx_frame[%d]=   ", i);
+//             for (int j = 0; j < canRx.rec_frame.can_dlc; ++j)
+//             {
+//                 printf("0x%02X ", canRx.rx_frame[i].data[j]);
+//             }
+//             printf("\n");
+//         }
+//     }
+//     // Lasttick = sYstick.gettick();
+//     // cout << "Outside success. Lasttick as " << Lasttick << endl;
+// }
 
 void canTxProcessor::canNTx()
 {
