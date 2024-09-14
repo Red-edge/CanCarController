@@ -13,7 +13,7 @@
 #include <linux/can/raw.h>
 
 // using namespace std;
-int main()
+int main()//这个是用来参考的can接发函数
 {
 
     int a = 1;
