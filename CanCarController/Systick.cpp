@@ -11,21 +11,25 @@ Desc:           Provide ms timetick from beginning of programme
 #include <iostream>
 #include <ctime>
 #include <unistd.h>
+#include "Systick.hpp"
 
 // using namespace std;
 // using namespace chrono;
-int systick = 0;
+// int systick = 0;
 
 int main()
 {
+    Systick systick;
     // start = clock(); // clock()返回单位是毫秒
     while (1)
     {
-        if (systick < int(clock()/ 1000))
+        if (systick.systick < int(clock()/ 1000))
         {
-            systick++;
-            printf("systick = %d \n", systick);
+            systick.systick++;
+            printf("systick = %d \n", systick.systick);
+            systick.gettick();
         }
+        
     }
 
     return 0;

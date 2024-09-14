@@ -63,7 +63,7 @@ void scanKeyboard(int i) // 键盘输入读取
 
     tcsetattr(STDIN_FILENO, TCSANOW, &stored_settings);
     scan = in;
-    exit;
+    return;
 }
 
 char M2006Update(char x)
