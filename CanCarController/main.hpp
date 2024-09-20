@@ -6,13 +6,8 @@
 #include "Systick.hpp"
 #include <iostream>
 
-
-
-
-
-
-
-
-
+int heartbeat;
+int canRxflag;
+uint64_t tmplstick;
 
 #endif

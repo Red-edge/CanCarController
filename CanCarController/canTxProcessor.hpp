@@ -17,7 +17,6 @@
 #include <termio.h>
 #include <thread>
 #include <errno.h>
-// #include "canRxPreprocessor.hpp"
 #include "Systick.hpp"
 
 using namespace std;
@@ -47,7 +46,7 @@ public:
         cout << "Destructed current canTxProcessor" << endl;
     }
 
-    void canNTx();
+    void canNTx(uint64_t curtick);
     void init_canTx(const char *canname, uint64_t curtick);
 };
 

@@ -22,33 +22,41 @@
 
 using namespace std;
 
-
 class canRxPreprocessor
 {
 private:
     /* data */
 public:
-    canRxPreprocessor(/* args */);
-    ~canRxPreprocessor();
     struct can_frame rx_frame[8] = {0};
-    int reccheck();
     struct can_frame rec_frame;
+    int rxcheck;
+    struct ifreq ifr;
+    struct sockaddr_can can_addr;
+    int ret;
+    int sockfd;
+    struct can_frame frame; // 定义一个 can_frame 变量
+    int rxflag;
+    int count_s;
+    int count_f;
+    int Lasttick;
+    int reccheck(uint64_t curtick);
+    void Init_canRx(const char *canname, uint64_t curtick);
+    canRxPreprocessor(/* args */)
+    {
+        rxcheck = 0;
+        ifr = {0};
+        can_addr = {0};
+        sockfd = -1;
+        ret = 0;
+        rxflag = 0;
+        count_s = 0;
+        count_f = 0;
+        Lasttick = 0;
+    }
+    ~canRxPreprocessor()
+    {
+    }
 };
 // canRxPreprocessor canRx;
-
-
-canRxPreprocessor::canRxPreprocessor(/* args */)
-{
-}
-
-canRxPreprocessor::~canRxPreprocessor()
-{
-}
-
-
-
-
-
-
 
 #endif

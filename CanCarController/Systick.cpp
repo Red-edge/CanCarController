@@ -41,12 +41,12 @@ uint64_t Systick::gettick()
     curtick = std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::system_clock::now().time_since_epoch());
     errtick = curtick.count() - systick.count();
-    if ((errtick - _errtick) >= 500)
-    {
-        // cout << "Get current running time " << errtick << endl;
-        _errtick = errtick;
+    // if ((errtick - _errtick) >= 500)
+    // {
+    //     cout << "Get current running time " << errtick << endl;
+    //     _errtick = errtick;
         
-    }
+    // }
     // Systick::~Systick();
     return errtick;
 }
