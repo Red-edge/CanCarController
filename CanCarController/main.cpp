@@ -15,6 +15,7 @@ int main()
     canTxProcessor canTx;
     canRxPreprocessor canRx;
     m2006Ctl m2006;
+
     heartbeat = 0;
     canRxflag = 0;
     tmplstick = tick.gettick();
@@ -40,16 +41,16 @@ int main()
         {
             cout << "Heartbeat 500ms Count " << heartbeat << ". Lasted " << (tmptick - tmplstick) << endl;
             heartbeat++;
-            // can_frame tmp = m2006.m2006Update();
-            // memcpy(canTx.tx_tmp, tmp.data, 8);
+            can_frame tmp = m2006.m2006Update();
+            memcpy(canTx.tx_tmp, tmp.data, 8);
             tmplstick = tmptick;
         }
         // Tx处理部
         if ((tmptick - canTx.Lasttick) >= tick.motorfrate)
         {
             canTx.canNTx(tmptick);
-            can_frame tmp = m2006.m2006Update();
-            memcpy(canTx.tx_tmp, tmp.data, 8);
+            // can_frame tmp = m2006.m2006Update();
+            // memcpy(canTx.tx_tmp, tmp.data, 8);
             // m2006.m2006Update();
         }
         // Rx处理部

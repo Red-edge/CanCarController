@@ -1,57 +1,38 @@
 #ifndef PID_HPP
 #define PID_HPP
 
-#include <math.h>
-class Pid
+#include <iostream>
+#include <unistd.h>
+
+
+class pid
 {
+private:
+    /* data */
 public:
-    enum PidModeType
-    {
-        PID_POSITION = 0,
-        PID_DELTA,
-        PID_DERIVATIVE_FILTERED,
-    };
-
-    PidModeType mode;
-
     float kp;
     float ki;
     float kd;
+    float max;
+    float imax;
+    int curspd;
+    int tgtspd;
 
-    float maxOut;
-    float maxIOut;
+    int pTmp;
 
-    float ref;
-    float fdb;
+    void init_pid(float p, float i, float d, float max, float imax, int tgtspd); // 可以用聚类判断电机，或者直接导入canRx
+    int pidUpdate(int curspd);
 
-    float result;
-    float pResult;
-    float iResult;
-    float dResult;
-
-    float dBuf[3];
-    float err[3];
-
-    bool firstupdate = 1;
-    bool isPitchSpd;
-    bool isPitch;
-    bool isYaw;
-    float err_lowsample[3];
-    float gama = 1.0f;
-    float last_fdb = 0.0f;
-
-    Pid();
-    Pid(PidModeType mode, float p, float i, float d, float max, float imax);
-
-    void Init();
-    void UpdateResult();
-    void Clear();
-
-    void SetParams(float p, float i, float d, float max, float imax);
-
-    // void UpdateIResult(float _err){iResult += ki * _err;iResult = Math::LimitMax(iResult, maxIOut);}
+    pid(/* args */) {}
+    ~pid() {}
 };
 
+// pid::pid(/* args */)
+// {
+// }
+
+// pid::~pid()
+// {
+// }
 
 #endif
-
