@@ -27,7 +27,7 @@ class canRxPreprocessor
 private:
     /* data */
 public:
-    struct can_frame rx_frame[8] = {0};
+    struct can_frame rx_frame[8] = {0};//canRx缓存
     struct can_frame rec_frame;
     int rxcheck;
     struct ifreq ifr;
