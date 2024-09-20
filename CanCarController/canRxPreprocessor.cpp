@@ -29,7 +29,7 @@ int canRxPreprocessor::reccheck(uint64_t curtick)
                 if (rec_frame.can_id == 0x201 + i)
                 {
                     rx_frame[i] = rec_frame;
-                    printf("Receive can sig from can 0x%02x. \n", rec_frame.can_id);
+                    // printf("Receive can sig from can 0x%02x. \n", rec_frame.can_id);
                     // cout << "Rx Can Succ." << endl;
                     rxflag = 1;
                 }

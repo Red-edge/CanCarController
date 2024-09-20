@@ -18,6 +18,8 @@ int main()
     canRxflag = 0;
     tmplstick = tick.gettick();
 
+    // int count = 0;
+
     char canname[8] = {};
     cout << "Init with current available can name : ";
     cin >> canname;
@@ -32,9 +34,9 @@ int main()
     while (1)
     {
         uint64_t tmptick = tick.gettick();
-        if ((tmptick - tmplstick) >= 200)
+        if ((tmptick - tmplstick) >= 500)
         {
-            cout << "Heartbeat 200ms Count " << heartbeat << ". Lasted " << (tmptick - tmplstick) << endl;
+            cout << "Heartbeat 500ms Count " << heartbeat << ". Lasted " << (tmptick - tmplstick) << endl;
             heartbeat++;
             tmplstick = tmptick;
         }
@@ -44,15 +46,23 @@ int main()
             canTx.canNTx(tmptick);
         }
         // Rx处理部
-        canRxflag = canRx.reccheck(tmptick);
-        // if (canRxflag == 0)
-        // {
-        //     cout << "Rx err ..." << endl;
-        // }
-        // else if (canRxflag == 2)
-        // {
-        //     cout << "Rx 0x200, omit" << endl;
-        // }
+        if ((tmptick - canRx.Lasttick) >= 1)
+        {
+            canRxflag = canRx.reccheck(tmptick);
+            if (canRxflag == 0)
+            {
+                cout << "Rx err ..." << endl;
+            }
+            // else if (canRxflag == 2)
+            // {
+            //     cout << "Rx 0x200, omit" << endl;
+            // }
+            // if (canRxflag == 1)
+            // {
+            //     count++;
+            //     cout << count << endl;
+            // }
+        }
     }
 
     return 0;

@@ -62,6 +62,7 @@ void canTxProcessor::init_canTx(const char *canname, uint64_t curtick)
 
 void canTxProcessor::canNTx(uint64_t curtick)
 {
+    std::memcpy(tx_frame.data, tx_tmp, 8);
     txcheck = write(sockfd, &tx_frame, sizeof(tx_frame));
     Lasttick = curtick;
     if (txcheck == -1)

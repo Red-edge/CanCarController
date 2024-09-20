@@ -10,24 +10,6 @@ Desc:           Provide ms timetick from beginning of programme; class declared;
 
 #include "Systick.hpp"
 
-// using namespace std;
-// using namespace chrono;
-// int systick = 0;
-
-// int main()  //Temp main for single file debug
-// {
-//     Systick sYstick;
-//     sYstick.init_tick();
-//     // start = clock(); // clock()返回单位是毫秒
-//     while (1)
-//     {
-//         sYstick.gettick();
-//         // sleep(1);
-//     }
-
-//     return 0;
-// }
-
 void Systick::init_tick()
 {
     systick = std::chrono::duration_cast<std::chrono::milliseconds>(
