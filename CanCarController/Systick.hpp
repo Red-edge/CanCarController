@@ -24,7 +24,7 @@ public:
     {
         errtick = 0;
         _errtick = 0;
-        motorfrate = 200;
+        motorfrate = 20;
         init_tick();
     }
     ~Systick()

@@ -115,32 +115,3 @@ void canTxProcessor::init_canTx(const char *canname, uint64_t curtick)
 //     }
 // }
 
-int main()
-{
-    Systick tick;
-    canTxProcessor canTx;
-    char canname[8] = {};
-    cout << "Init with current available can name : ";
-    cin >> canname;
-    canTx.init_canTx(canname, tick.gettick());
-    cout << canTx.Lasttick << endl;
-    cout << tick.errtick << endl;
-    while (1)
-    {
-        if ((tick.gettick() - canTx.Lasttick) >= tick.motorfrate)
-        {
-            canTx.txcheck = write(canTx.sockfd, &canTx.tx_frame, sizeof(canTx.tx_frame));
-            if (canTx.txcheck == -1)
-            {
-                std::cerr << "Failed to send CAN message" << std::endl;
-                printf("%s\n", strerror(errno));
-                // close(canTx.sockfd);
-                // return 1;
-            }
-            canTx.Lasttick = tick.gettick();
-            // cout << "Inside success. Lasttick as " << Lasttick << endl;
-        }
-    }
-
-    return 0;
-}

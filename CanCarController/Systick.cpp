@@ -43,7 +43,7 @@ uint64_t Systick::gettick()
     errtick = curtick.count() - systick.count();
     if ((errtick - _errtick) >= 500)
     {
-        cout << "Get current running time " << errtick << endl;
+        // cout << "Get current running time " << errtick << endl;
         _errtick = errtick;
         
     }
