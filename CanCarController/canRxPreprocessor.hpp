@@ -34,7 +34,7 @@ public:
     int reccheck();
     struct can_frame rec_frame;
 };
-canRxPreprocessor canRx;
+// canRxPreprocessor canRx;
 
 
 canRxPreprocessor::canRxPreprocessor(/* args */)

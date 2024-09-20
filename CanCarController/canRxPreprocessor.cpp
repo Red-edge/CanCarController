@@ -19,7 +19,7 @@ int rxflag = 0;
 int count_s = 0;
 int count_f = 0;
 int Lasttick = 0;
-// canRxPreprocessor canRx;
+canRxPreprocessor canRx;
 
 int canRxPreprocessor::reccheck()
 {

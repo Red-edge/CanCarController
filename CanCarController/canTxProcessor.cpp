@@ -9,28 +9,8 @@ Desc:           Process the CAN TX and store them in cache; class declared; succ
 */
 
 #include "canTxProcessor.hpp"
-#include "canRxPreprocessor.hpp"
 
-int txcheck;
-struct ifreq ifr = {0};
-struct sockaddr_can can_addr = {0};
-int ret;
-int sockfd = -1;
-struct can_frame tx_frame;
-char tx_tmp[8] = {0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00};
-int txflag = 0;
-int count_s = 0;
-int count_f = 0;
-// canTxProcessor canTx;
-// Systick sYstick;
-
-// int main()
-// {
-
-//     return 0;
-// }
-
-int canTxProcessor::init_canTx()
+void canTxProcessor::init_canTx(const char *canname, uint64_t curtick)
 {
 
     sockfd = socket(PF_CAN, SOCK_RAW, CAN_RAW);
@@ -38,17 +18,18 @@ int canTxProcessor::init_canTx()
     {
         perror("socket error");
         exit(EXIT_FAILURE);
-        return 0;
+        // return 0;
     }
 
-    strcpy(ifr.ifr_name, "vcan"); // 指定名字，注意改掉名字
+    strcpy(ifr.ifr_name, canname); // 指定名字，注意改掉名字
 
     if (ioctl(sockfd, SIOCGIFINDEX, &ifr) == -1)
     {
         std::cerr << "Failed to get CAN interface index" << std::endl;
         printf("%s\n", strerror(errno));
         close(sockfd);
-        return 1;
+        // return 1;
+        // init_canTx(canname);
     }
 
     can_addr.can_family = AF_CAN; // 填充数据
@@ -61,7 +42,7 @@ int canTxProcessor::init_canTx()
         perror("bind error");
         close(sockfd);
         exit(EXIT_FAILURE);
-        return 0;
+        // return 0;
     }
 
     // 准备Can信号，这里先只考虑2006电机了
@@ -73,7 +54,10 @@ int canTxProcessor::init_canTx()
     can_addr.can_family = AF_CAN; // 填充数据
     can_addr.can_ifindex = ifr.ifr_ifindex;
 
-    return 0;
+    Lasttick = curtick;
+
+    cout << "Init can success!" << endl;
+    // return 0;
 }
 // sYstick.init_tick();
 // Lasttick = sYstick.gettick();
@@ -107,26 +91,56 @@ int canTxProcessor::init_canTx()
 //     // cout << "Outside success. Lasttick as " << Lasttick << endl;
 // }
 
-void canTxProcessor::canNTx()
-{
-    txcheck = write(sockfd, &tx_frame, sizeof(tx_frame));
-    if (txcheck == -1)
-    {
-        std::cerr << "Failed to send CAN message" << std::endl;
-        printf("%s\n", strerror(errno));
-        close(sockfd);
-        return;
-    }
-    // Lasttick = sYstick.gettick();
-    // cout << "Inside success. Lasttick as " << Lasttick << endl;
+// void canTxProcessor::canNTx()
+// {
+//     txcheck = write(sockfd, &tx_frame, sizeof(tx_frame));
+//     if (txcheck == -1)
+//     {
+//         std::cerr << "Failed to send CAN message" << std::endl;
+//         printf("%s\n", strerror(errno));
+//         close(sockfd);
+//         return;
+//     }
+//     // Lasttick = sYstick.gettick();
+//     // cout << "Inside success. Lasttick as " << Lasttick << endl;
 
-    for (int i = 0; i < 8; i += 1)
+//     for (int i = 0; i < 8; i += 1)
+//     {
+//         printf("rx_frame[%d]=   ", i);
+//         for (int j = 0; j < canRx.rec_frame.can_dlc; ++j)
+//         {
+//             printf("0x%02X ", canRx.rx_frame[i].data[j]);
+//         }
+//         printf("\n");
+//     }
+// }
+
+int main()
+{
+    Systick tick;
+    canTxProcessor canTx;
+    char canname[8] = {};
+    cout << "Init with current available can name : ";
+    cin >> canname;
+    canTx.init_canTx(canname, tick.gettick());
+    cout << canTx.Lasttick << endl;
+    cout << tick.errtick << endl;
+    while (1)
     {
-        printf("rx_frame[%d]=   ", i);
-        for (int j = 0; j < canRx.rec_frame.can_dlc; ++j)
+        if ((tick.gettick() - canTx.Lasttick) >= tick.motorfrate)
         {
-            printf("0x%02X ", canRx.rx_frame[i].data[j]);
+            canTx.txcheck = write(canTx.sockfd, &canTx.tx_frame, sizeof(canTx.tx_frame));
+            if (canTx.txcheck == -1)
+            {
+                std::cerr << "Failed to send CAN message" << std::endl;
+                printf("%s\n", strerror(errno));
+                // close(canTx.sockfd);
+                // return 1;
+            }
+            canTx.Lasttick = tick.gettick();
+            // cout << "Inside success. Lasttick as " << Lasttick << endl;
         }
-        printf("\n");
     }
+
+    return 0;
 }

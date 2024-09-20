@@ -9,7 +9,6 @@ Desc:           Provide ms timetick from beginning of programme; class declared;
 */
 
 #include "Systick.hpp"
-#include "canRxPreprocessor.hpp"
 
 // using namespace std;
 // using namespace chrono;
@@ -28,26 +27,39 @@ Desc:           Provide ms timetick from beginning of programme; class declared;
 
 //     return 0;
 // }
-// Systick sYstick;
 
 void Systick::init_tick()
 {
-    this->systick = std::chrono::duration_cast<std::chrono::milliseconds>(
+    systick = std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::system_clock::now().time_since_epoch());
     // cout << "Init complete at clock " << this->systick.count() << endl;
 }
 
 uint64_t Systick::gettick()
 {
-    chrono::milliseconds systick;
-    systick = std::chrono::duration_cast<std::chrono::milliseconds>(
+    chrono::milliseconds curtick;
+    curtick = std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::system_clock::now().time_since_epoch());
-    // errtick = systick.count() - this->systick.count();
-    // if ((errtick - _errtick)>=500)
-    // {
-    //     cout << "Get current running time " << errtick << endl;
-    //     _errtick = errtick;
-    // }
-
-    return systick.count();
+    errtick = curtick.count() - systick.count();
+    if ((errtick - _errtick) >= 500)
+    {
+        cout << "Get current running time " << errtick << endl;
+        _errtick = errtick;
+        
+    }
+    // Systick::~Systick();
+    return errtick;
 }
+
+
+// int main()
+// {
+//     Systick tick;
+
+//     while (1)
+//     {
+//         tick.gettick();
+//     }
+
+//     return 0;
+// }

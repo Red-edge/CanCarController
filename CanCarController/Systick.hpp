@@ -4,7 +4,6 @@
 #include <iostream>
 #include <chrono>
 #include <unistd.h>
-#include "canRxPreprocessor.hpp"
 #include "canTxProcessor.hpp"
 
 using namespace std;
@@ -16,13 +15,22 @@ private:
     std::chrono::milliseconds systick;
 
 public:
-    uint64_t errtick = 0;
-    uint64_t _errtick = 0;
+    uint64_t errtick;
+    uint64_t _errtick;
     uint64_t gettick();
     void init_tick();
-    int motorfrate = 1;
+    int motorfrate;
+    Systick()
+    {
+        errtick = 0;
+        _errtick = 0;
+        motorfrate = 200;
+        init_tick();
+    }
+    ~Systick()
+    {
+        cout << "Destructed current Systick" << endl;
+    }
 };
-
-Systick sYstick;
 
 #endif

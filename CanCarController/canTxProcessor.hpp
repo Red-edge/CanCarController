@@ -17,7 +17,7 @@
 #include <termio.h>
 #include <thread>
 #include <errno.h>
-#include "canRxPreprocessor.hpp"
+// #include "canRxPreprocessor.hpp"
 #include "Systick.hpp"
 
 using namespace std;
@@ -27,22 +27,31 @@ class canTxProcessor
 private:
     /* data */
 public:
-    canTxProcessor(/* args */);
-    ~canTxProcessor();
-    int init_canTx();
+    int txcheck;
+    struct ifreq ifr = {0};
+    struct sockaddr_can can_addr = {0};
+    int ret;
+    int sockfd = -1;
+    struct can_frame tx_frame;
+    char tx_tmp[8] = {0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00};
+    int txflag = 0;
+    int count_s = 0;
+    int count_f = 0;
+    uint64_t Lasttick;
+    canTxProcessor(/* args */)
+    {
+        Lasttick = 0;
+    }
+    ~canTxProcessor()
+    {
+        cout << "Destructed current canTxProcessor" << endl;
+    }
+
     void canNTx();
-    uint64_t Lasttick = 0;
+    void init_canTx(const char *canname, uint64_t curtick);
 };
 
-canTxProcessor canTx;
-
-canTxProcessor::canTxProcessor(/* args */)
-{
-}
-
-canTxProcessor::~canTxProcessor()
-{
-}
+// canTxProcessor canTx;
 
 // Systick sYstick;
 
