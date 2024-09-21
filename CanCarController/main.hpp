@@ -6,10 +6,13 @@
 #include "Systick.hpp"
 #include "m2006Ctl.hpp"
 #include "pid.hpp"
+#include "controller.hpp"
 #include <iostream>
+#include <thread>
 
 int heartbeat;
 int canRxflag;
+int keyBoard;
 uint64_t tmplstick;
 
 #endif

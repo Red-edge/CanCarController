@@ -9,6 +9,8 @@ Desc:           Process m2006 can msg and spd control, based on pid module
 */
 #include "m2006Ctl.hpp"
 
+using namespace std;
+
 void m2006Ctl::m2006Init(struct can_frame *m2006rx) // 用于重定位指针
 {
     // m2006rxCan = m2006addr;
@@ -16,7 +18,7 @@ void m2006Ctl::m2006Init(struct can_frame *m2006rx) // 用于重定位指针
     // m2006rxCan.can_id = 0x200;
     // memcpy(m2006rxCan.data, m2006rxTmp, 8);
     m2006rxCan = m2006rx;
-    m2006pid.init_pid(0.1f, 0.0f, 0.0f, 100.0f, 0, 0x0100);
+    m2006pid.init_pid(1.5f, 0.0f, 0.0f, 1000.0f, 0, 0x0000);
 
     m2006txCan.can_dlc = 8;
     m2006txCan.can_id = 0x200;
@@ -41,41 +43,29 @@ can_frame m2006Ctl::m2006Update()
         // 暂存Rx，更新pid后参数
         // int curspd = int((m2006rxCan + i)->data[2]) * 16 * 16 + int((m2006rxCan + i)->data[3]);
         int16_t curspd = ((char)(m2006rxCan[i].data[2]) << 8) | (char)(m2006rxCan[i].data[3]);
-        // cout << curspd << " ";
+        // cout << curspd << " ,";
         int16_t _tgtcur = m2006pid.pidUpdate(curspd);
-        // cout << curspd << endl;
+        // cout << _tgtcur << " .";
         // memcpy(&m2006txTmp[2 * i + 1], (char *)(_tgtcur), 8);
         // memcpy(&m2006txTmp[2 * i], (char *)(_tgtcur >> 8), 8);
         // m2006txTmp[2 * i + 1] = (char)(_tgtcur);
         // m2006txTmp[2 * i] = (char)(_tgtcur >> 8);
-        memcpy(&m2006txTmp[2 * i], (char *)(&_tgtcur), 16);
+        m2006txTmp[2 * i] = char(int8_t(_tgtcur / (16 * 16)));
+        m2006txTmp[2 * i + 1] = char(int8_t(abs(_tgtcur) % (16 * 16)));
+        // cout << _tgtcur << " ";
     }
     // cout << endl;
-    // 测试tx更新
-    // int tmp = 0x08;
-    // if (m2006txTmp[1] >= 0x60)
-    // {
-    //     tmp = -tmp;
-    // }
-    // else if (m2006txTmp[1] <= 0x10)
-    // {
-    //     tmp = -tmp;
-    // }
-    // m2006txTmp[1] += tmp;
 
     // 更新Tx
     memcpy(m2006txCan.data, m2006txTmp, 8);
 
     // 用于观测txCan内容
-    //  cout << int(m2006txCan.can_dlc) << endl;
-    //  cout << m2006txCan.can_id << endl;
+    // cout << int(m2006txCan.can_dlc) << endl;
+    // cout << m2006txCan.can_id << endl;
     // for (int i = 0; i < 8; i++)
     // {
-    // for (int j = 0; j < 8; j++)
-    // {
-    // cout << int(m2006txCan.data[i]) << " ";
-    // }
-    // cout << endl;
+
+    //     cout << int(m2006txCan.data[i]) << " ";
     // }
     // cout << endl;
 

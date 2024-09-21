@@ -96,9 +96,22 @@ CMakeFiles/main.dir/canTxProcessor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/canTxProcessor.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rededge/workspace/Personal-code/CanCarController/CanCarController/canTxProcessor.cpp -o CMakeFiles/main.dir/canTxProcessor.cpp.s
 
+CMakeFiles/main.dir/controller.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/controller.cpp.o: ../controller.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rededge/workspace/Personal-code/CanCarController/CanCarController/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/controller.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/controller.cpp.o -c /home/rededge/workspace/Personal-code/CanCarController/CanCarController/controller.cpp
+
+CMakeFiles/main.dir/controller.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/controller.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/rededge/workspace/Personal-code/CanCarController/CanCarController/controller.cpp > CMakeFiles/main.dir/controller.cpp.i
+
+CMakeFiles/main.dir/controller.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/controller.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/rededge/workspace/Personal-code/CanCarController/CanCarController/controller.cpp -o CMakeFiles/main.dir/controller.cpp.s
+
 CMakeFiles/main.dir/m2006Ctl.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/m2006Ctl.cpp.o: ../m2006Ctl.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rededge/workspace/Personal-code/CanCarController/CanCarController/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/m2006Ctl.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rededge/workspace/Personal-code/CanCarController/CanCarController/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/m2006Ctl.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/m2006Ctl.cpp.o -c /home/rededge/workspace/Personal-code/CanCarController/CanCarController/m2006Ctl.cpp
 
 CMakeFiles/main.dir/m2006Ctl.cpp.i: cmake_force
@@ -111,7 +124,7 @@ CMakeFiles/main.dir/m2006Ctl.cpp.s: cmake_force
 
 CMakeFiles/main.dir/main.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rededge/workspace/Personal-code/CanCarController/CanCarController/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rededge/workspace/Personal-code/CanCarController/CanCarController/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/main.dir/main.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/main.cpp.o -c /home/rededge/workspace/Personal-code/CanCarController/CanCarController/main.cpp
 
 CMakeFiles/main.dir/main.cpp.i: cmake_force
@@ -124,7 +137,7 @@ CMakeFiles/main.dir/main.cpp.s: cmake_force
 
 CMakeFiles/main.dir/pid.cpp.o: CMakeFiles/main.dir/flags.make
 CMakeFiles/main.dir/pid.cpp.o: ../pid.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rededge/workspace/Personal-code/CanCarController/CanCarController/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/main.dir/pid.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/rededge/workspace/Personal-code/CanCarController/CanCarController/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/main.dir/pid.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/pid.cpp.o -c /home/rededge/workspace/Personal-code/CanCarController/CanCarController/pid.cpp
 
 CMakeFiles/main.dir/pid.cpp.i: cmake_force
@@ -140,6 +153,7 @@ main_OBJECTS = \
 "CMakeFiles/main.dir/Systick.cpp.o" \
 "CMakeFiles/main.dir/canRxPreprocessor.cpp.o" \
 "CMakeFiles/main.dir/canTxProcessor.cpp.o" \
+"CMakeFiles/main.dir/controller.cpp.o" \
 "CMakeFiles/main.dir/m2006Ctl.cpp.o" \
 "CMakeFiles/main.dir/main.cpp.o" \
 "CMakeFiles/main.dir/pid.cpp.o"
@@ -150,12 +164,13 @@ main_EXTERNAL_OBJECTS =
 main: CMakeFiles/main.dir/Systick.cpp.o
 main: CMakeFiles/main.dir/canRxPreprocessor.cpp.o
 main: CMakeFiles/main.dir/canTxProcessor.cpp.o
+main: CMakeFiles/main.dir/controller.cpp.o
 main: CMakeFiles/main.dir/m2006Ctl.cpp.o
 main: CMakeFiles/main.dir/main.cpp.o
 main: CMakeFiles/main.dir/pid.cpp.o
 main: CMakeFiles/main.dir/build.make
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rededge/workspace/Personal-code/CanCarController/CanCarController/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/rededge/workspace/Personal-code/CanCarController/CanCarController/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

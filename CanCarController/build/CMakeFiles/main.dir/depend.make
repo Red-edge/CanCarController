@@ -14,6 +14,9 @@ CMakeFiles/main.dir/canTxProcessor.cpp.o: ../Systick.hpp
 CMakeFiles/main.dir/canTxProcessor.cpp.o: ../canTxProcessor.cpp
 CMakeFiles/main.dir/canTxProcessor.cpp.o: ../canTxProcessor.hpp
 
+CMakeFiles/main.dir/controller.cpp.o: ../controller.cpp
+CMakeFiles/main.dir/controller.cpp.o: ../controller.hpp
+
 CMakeFiles/main.dir/m2006Ctl.cpp.o: ../m2006Ctl.cpp
 CMakeFiles/main.dir/m2006Ctl.cpp.o: ../m2006Ctl.hpp
 CMakeFiles/main.dir/m2006Ctl.cpp.o: ../pid.hpp
@@ -21,6 +24,7 @@ CMakeFiles/main.dir/m2006Ctl.cpp.o: ../pid.hpp
 CMakeFiles/main.dir/main.cpp.o: ../Systick.hpp
 CMakeFiles/main.dir/main.cpp.o: ../canRxPreprocessor.hpp
 CMakeFiles/main.dir/main.cpp.o: ../canTxProcessor.hpp
+CMakeFiles/main.dir/main.cpp.o: ../controller.hpp
 CMakeFiles/main.dir/main.cpp.o: ../m2006Ctl.hpp
 CMakeFiles/main.dir/main.cpp.o: ../main.cpp
 CMakeFiles/main.dir/main.cpp.o: ../main.hpp

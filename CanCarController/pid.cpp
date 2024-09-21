@@ -25,7 +25,7 @@ int pid::pidUpdate(int16_t curcut)
     pTmp = kp * float(tgtspd - curcut);
     pTmp = (pTmp > max ? max : pTmp);
     pTmp = (pTmp < (-max) ? (-max) : pTmp);
-    pTmp = pTmp * 10.0f;
+    // pTmp = pTmp * 10.0f;
     // cout << pTmp << endl;
     // curcut += pTmp;
     return pTmp;

@@ -9,15 +9,19 @@ Desc:           main function for program
 */
 #include "main.hpp"
 
+using namespace std;
+
 int main()
 {
     Systick tick;
     canTxProcessor canTx;
     canRxPreprocessor canRx;
     m2006Ctl m2006;
+    controller key;
 
     heartbeat = 0;
     canRxflag = 0;
+    keyBoard = 0;
     tmplstick = tick.gettick();
 
     // int count = 0;
@@ -30,12 +34,16 @@ int main()
     canRx.Init_canRx(canname, tick.gettick());
     m2006.m2006Init(canRx.rx_frame);
 
+    // thread a{key.scanKeyboard()};
+
     cout << "Align canTx clock at " << canTx.Lasttick << endl;
     cout << "Align canRx clock at " << canRx.Lasttick << endl;
     cout << "Align Systick clock at " << tick.errtick << endl;
 
+    // sleep(2);
     while (1)
     {
+        // a.detach();
         uint64_t tmptick = tick.gettick();
         if ((tmptick - tmplstick) >= 500)
         {
@@ -48,7 +56,8 @@ int main()
         // Tx处理部
         if ((tmptick - canTx.Lasttick) >= tick.motorfrate)
         {
-
+            // keyBoard = scanKeyboard();
+            // cout << keyBoard << endl;
             can_frame tmp = m2006.m2006Update();
             memcpy(canTx.tx_tmp, tmp.data, 8);
             canTx.canNTx(tmptick);
@@ -57,6 +66,7 @@ int main()
         // Rx处理部
         if ((tmptick - canRx.Lasttick) >= 1)
         {
+
             canRxflag = canRx.reccheck(tmptick);
             if (canRxflag == 0)
             {

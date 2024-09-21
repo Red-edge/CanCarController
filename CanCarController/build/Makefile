@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named main
+# Target rules for targets named test
 
 # Build rule for target.
-main: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 main
-.PHONY : main
+test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test
+.PHONY : test
 
 # fast build rule for target.
-main/fast:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-.PHONY : main/fast
+test/fast:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/build
+.PHONY : test/fast
 
 Systick.o: Systick.cpp.o
 
@@ -129,7 +129,7 @@ Systick.o: Systick.cpp.o
 
 # target to build an object file
 Systick.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Systick.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Systick.cpp.o
 .PHONY : Systick.cpp.o
 
 Systick.i: Systick.cpp.i
@@ -138,7 +138,7 @@ Systick.i: Systick.cpp.i
 
 # target to preprocess a source file
 Systick.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Systick.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Systick.cpp.i
 .PHONY : Systick.cpp.i
 
 Systick.s: Systick.cpp.s
@@ -147,7 +147,7 @@ Systick.s: Systick.cpp.s
 
 # target to generate assembly for a file
 Systick.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/Systick.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/Systick.cpp.s
 .PHONY : Systick.cpp.s
 
 canRxPreprocessor.o: canRxPreprocessor.cpp.o
@@ -156,7 +156,7 @@ canRxPreprocessor.o: canRxPreprocessor.cpp.o
 
 # target to build an object file
 canRxPreprocessor.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/canRxPreprocessor.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/canRxPreprocessor.cpp.o
 .PHONY : canRxPreprocessor.cpp.o
 
 canRxPreprocessor.i: canRxPreprocessor.cpp.i
@@ -165,7 +165,7 @@ canRxPreprocessor.i: canRxPreprocessor.cpp.i
 
 # target to preprocess a source file
 canRxPreprocessor.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/canRxPreprocessor.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/canRxPreprocessor.cpp.i
 .PHONY : canRxPreprocessor.cpp.i
 
 canRxPreprocessor.s: canRxPreprocessor.cpp.s
@@ -174,7 +174,7 @@ canRxPreprocessor.s: canRxPreprocessor.cpp.s
 
 # target to generate assembly for a file
 canRxPreprocessor.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/canRxPreprocessor.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/canRxPreprocessor.cpp.s
 .PHONY : canRxPreprocessor.cpp.s
 
 canTxProcessor.o: canTxProcessor.cpp.o
@@ -183,7 +183,7 @@ canTxProcessor.o: canTxProcessor.cpp.o
 
 # target to build an object file
 canTxProcessor.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/canTxProcessor.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/canTxProcessor.cpp.o
 .PHONY : canTxProcessor.cpp.o
 
 canTxProcessor.i: canTxProcessor.cpp.i
@@ -192,7 +192,7 @@ canTxProcessor.i: canTxProcessor.cpp.i
 
 # target to preprocess a source file
 canTxProcessor.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/canTxProcessor.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/canTxProcessor.cpp.i
 .PHONY : canTxProcessor.cpp.i
 
 canTxProcessor.s: canTxProcessor.cpp.s
@@ -201,8 +201,35 @@ canTxProcessor.s: canTxProcessor.cpp.s
 
 # target to generate assembly for a file
 canTxProcessor.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/canTxProcessor.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/canTxProcessor.cpp.s
 .PHONY : canTxProcessor.cpp.s
+
+controller.o: controller.cpp.o
+
+.PHONY : controller.o
+
+# target to build an object file
+controller.cpp.o:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/controller.cpp.o
+.PHONY : controller.cpp.o
+
+controller.i: controller.cpp.i
+
+.PHONY : controller.i
+
+# target to preprocess a source file
+controller.cpp.i:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/controller.cpp.i
+.PHONY : controller.cpp.i
+
+controller.s: controller.cpp.s
+
+.PHONY : controller.s
+
+# target to generate assembly for a file
+controller.cpp.s:
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/controller.cpp.s
+.PHONY : controller.cpp.s
 
 m2006Ctl.o: m2006Ctl.cpp.o
 
@@ -210,7 +237,7 @@ m2006Ctl.o: m2006Ctl.cpp.o
 
 # target to build an object file
 m2006Ctl.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/m2006Ctl.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/m2006Ctl.cpp.o
 .PHONY : m2006Ctl.cpp.o
 
 m2006Ctl.i: m2006Ctl.cpp.i
@@ -219,7 +246,7 @@ m2006Ctl.i: m2006Ctl.cpp.i
 
 # target to preprocess a source file
 m2006Ctl.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/m2006Ctl.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/m2006Ctl.cpp.i
 .PHONY : m2006Ctl.cpp.i
 
 m2006Ctl.s: m2006Ctl.cpp.s
@@ -228,7 +255,7 @@ m2006Ctl.s: m2006Ctl.cpp.s
 
 # target to generate assembly for a file
 m2006Ctl.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/m2006Ctl.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/m2006Ctl.cpp.s
 .PHONY : m2006Ctl.cpp.s
 
 main.o: main.cpp.o
@@ -237,7 +264,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -246,7 +273,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -255,7 +282,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 pid.o: pid.cpp.o
@@ -264,7 +291,7 @@ pid.o: pid.cpp.o
 
 # target to build an object file
 pid.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/pid.cpp.o
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/pid.cpp.o
 .PHONY : pid.cpp.o
 
 pid.i: pid.cpp.i
@@ -273,7 +300,7 @@ pid.i: pid.cpp.i
 
 # target to preprocess a source file
 pid.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/pid.cpp.i
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/pid.cpp.i
 .PHONY : pid.cpp.i
 
 pid.s: pid.cpp.s
@@ -282,7 +309,7 @@ pid.s: pid.cpp.s
 
 # target to generate assembly for a file
 pid.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/pid.cpp.s
+	$(MAKE) -f CMakeFiles/test.dir/build.make CMakeFiles/test.dir/pid.cpp.s
 .PHONY : pid.cpp.s
 
 # Help Target
@@ -293,7 +320,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... main"
+	@echo "... test"
 	@echo "... Systick.o"
 	@echo "... Systick.i"
 	@echo "... Systick.s"
@@ -303,6 +330,9 @@ help:
 	@echo "... canTxProcessor.o"
 	@echo "... canTxProcessor.i"
 	@echo "... canTxProcessor.s"
+	@echo "... controller.o"
+	@echo "... controller.i"
+	@echo "... controller.s"
 	@echo "... m2006Ctl.o"
 	@echo "... m2006Ctl.i"
 	@echo "... m2006Ctl.s"
