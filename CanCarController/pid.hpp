@@ -4,7 +4,6 @@
 #include <iostream>
 #include <unistd.h>
 
-
 class pid
 {
 private:
@@ -15,13 +14,12 @@ public:
     float kd;
     float max;
     float imax;
-    int curspd;
-    int tgtspd;
+    float tgtspd; // rpm转子，出端RPM = /36
 
     int pTmp;
 
-    void init_pid(float p, float i, float d, float max, float imax, int tgtspd); // 可以用聚类判断电机，或者直接导入canRx
-    int pidUpdate(int curspd);
+    void init_pid(float p, float i, float d, float max, float imax, float tgtspd); // 可以用聚类判断电机，或者直接导入canRx, tgtspd单位是RPM
+    int pidUpdate(int16_t curcur);
 
     pid(/* args */) {}
     ~pid() {}

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void pid::init_pid(float p, float i, float d, float max, float imax, int tgtspd)
+void pid::init_pid(float p, float i, float d, float max, float imax, float tgtspd)
 {
     kp = p;
     ki = i;
@@ -13,16 +13,21 @@ void pid::init_pid(float p, float i, float d, float max, float imax, int tgtspd)
     pTmp = 0;
 }
 
-int pid::pidUpdate(int curspd)
+int pid::pidUpdate(int16_t curcut)
 {
-    cout << curspd << " ";
-    // if (curspd > 5000)
-    //     curspd = ~curspd;
-    this->curspd = curspd;
-    pTmp = kp * (tgtspd - curspd);
+    // 速度反馈转电流输出，相当于将速度的差值映射到电流的调教
+    // if (curspd >)
+    // {
+
+    // }
+
+    // this->curcur = curspd;
+    pTmp = kp * float(tgtspd - curcut);
     pTmp = (pTmp > max ? max : pTmp);
     pTmp = (pTmp < (-max) ? (-max) : pTmp);
-    pTmp = pTmp + curspd;
+    pTmp = pTmp * 10.0f;
+    // cout << pTmp << endl;
+    // curcut += pTmp;
     return pTmp;
 }
 

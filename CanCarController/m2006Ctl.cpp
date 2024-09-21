@@ -16,7 +16,7 @@ void m2006Ctl::m2006Init(struct can_frame *m2006rx) // 用于重定位指针
     // m2006rxCan.can_id = 0x200;
     // memcpy(m2006rxCan.data, m2006rxTmp, 8);
     m2006rxCan = m2006rx;
-    m2006pid.init_pid(0.001, 0, 0, 500, 0, 80);
+    m2006pid.init_pid(0.1f, 0.0f, 0.0f, 100.0f, 0, 0x0100);
 
     m2006txCan.can_dlc = 8;
     m2006txCan.can_id = 0x200;
@@ -36,18 +36,21 @@ void m2006Ctl::m2006Init(struct can_frame *m2006rx) // 用于重定位指针
 can_frame m2006Ctl::m2006Update()
 {
     // rx传入pid,传出为tx
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < 4; i++)
     {
         // 暂存Rx，更新pid后参数
-        int curspd = (m2006rxCan + i)->data[2] * 16 * 16 + (m2006rxCan + i)->data[3];
-        int _tgtspd = m2006pid.pidUpdate(curspd);
-        if (i < 4)
-        {
-            m2006txTmp[2 * i] = int(_tgtspd / 16 / 16);
-            m2006txTmp[2 * i + 1] = (_tgtspd % (16 * 16));
-        }
+        // int curspd = int((m2006rxCan + i)->data[2]) * 16 * 16 + int((m2006rxCan + i)->data[3]);
+        int16_t curspd = ((char)(m2006rxCan[i].data[2]) << 8) | (char)(m2006rxCan[i].data[3]);
+        // cout << curspd << " ";
+        int16_t _tgtcur = m2006pid.pidUpdate(curspd);
+        // cout << curspd << endl;
+        // memcpy(&m2006txTmp[2 * i + 1], (char *)(_tgtcur), 8);
+        // memcpy(&m2006txTmp[2 * i], (char *)(_tgtcur >> 8), 8);
+        // m2006txTmp[2 * i + 1] = (char)(_tgtcur);
+        // m2006txTmp[2 * i] = (char)(_tgtcur >> 8);
+        memcpy(&m2006txTmp[2 * i], (char *)(&_tgtcur), 16);
     }
-
+    // cout << endl;
     // 测试tx更新
     // int tmp = 0x08;
     // if (m2006txTmp[1] >= 0x60)
