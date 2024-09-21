@@ -58,9 +58,13 @@ int main()
         {
             // keyBoard = scanKeyboard();
             // cout << keyBoard << endl;
-            can_frame tmp = m2006.m2006Update();
-            memcpy(canTx.tx_tmp, tmp.data, 8);
-            canTx.canNTx(tmptick);
+            for (int i = 0; i < 2; i++)
+            {
+                can_frame tmp = m2006.m2006Update(i);
+                memcpy(canTx.tx_tmp, tmp.data, 8);
+                canTx.canNTx(tmptick);
+            }
+
             // m2006.m2006Update();
         }
         // Rx处理部
