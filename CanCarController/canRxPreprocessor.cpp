@@ -12,46 +12,41 @@ Desc:           Process the CAN RX and store them in cache; classes added, faile
 int canRxPreprocessor::reccheck(uint64_t curtick)
 {
 
-    if ((Lasttick - curtick) >= 1)
+    rxflag = 0;
+    rxcheck = read(sockfd, &rec_frame, sizeof(rec_frame)); // read怎么写的？是读取的can网络设备还是can信号情况？为什么信号会一直有？
+    if (rxcheck > 0)
     {
-        rxflag = 0;
-        rxcheck = read(sockfd, &rec_frame, sizeof(rec_frame)); // read怎么写的？是读取的can网络设备还是can信号情况？为什么信号会一直有？
-        if (rxcheck > 0)
+        Lasttick = curtick;
+        if (rec_frame.can_id == 0x200)
         {
-            Lasttick = curtick;
-            if (rec_frame.can_id == 0x200)
-            {
-                return 2;
-            }
-
-            for (int i = 0; i < 8; i += 1)
-            {
-                if (rec_frame.can_id == 0x201 + i)
-                {
-                    rx_frame[i] = rec_frame;
-                    // printf("Receive can sig from can 0x%02x. \n", rec_frame.can_id);
-                    // cout << "Rx Can Succ." << endl;
-                    rxflag = 1;
-                }
-            }
-            if (rxflag == 0)
-            {
-                cout << "Rx Can Unknown." << endl;
-            }
-
-            return 1;
+            return 2;
         }
-        else
+
+        for (int i = 0; i < 8; i += 1)
         {
-            cout << "Rx Can Err." << endl;
-            Lasttick = curtick;
-            return 0;
+            if (rec_frame.can_id == 0x201 + i)
+            {
+                rx_frame[i] = rec_frame;
+                // printf("Receive can sig from can 0x%02x. \n", rec_frame.can_id);
+                // cout << "Rx Can Succ." << endl;
+                rxflag = 1;
+            }
         }
+        if (rxflag == 0)
+        {
+            cout << "Rx Can Unknown." << endl;
+        }
+
+        return 1;
     }
     else
     {
+        cout << "Rx Can Err." << endl;
+        Lasttick = curtick;
         return 0;
     }
+
+    return 0;
 }
 
 void canRxPreprocessor::Init_canRx(const char *canname, uint64_t curtick)

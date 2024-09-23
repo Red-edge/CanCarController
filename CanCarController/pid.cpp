@@ -20,42 +20,35 @@ void pid::init_pid(float p, float i, float d, float max, float imax, float tgtsp
 
 int pid::pidUpdate(int16_t curspd, int i)
 {
-    // 速度反馈转电流输出，相当于将速度的差值映射到电流的调教
-    // if (curspd >)
-    // {
-
-    // }
-
-    // this->curcur = curspd;
-    pTmp = 0;
-    dTmp = 0;
-    Tmp = 0;
-
+    // 累值传递
     err[i][2] = err[i][1];
     err[i][1] = err[i][0];
-    err[i][0] = tgtspd - curspd;
+    err[i][0] = int16_t(tgtspd - curspd);
 
     dBuf[i][2] = dBuf[i][1];
     dBuf[i][1] = dBuf[i][0];
     dBuf[i][0] = (err[i][0] - 2.0f * err[i][1] + err[i][2]);
 
-    // kp实现
+    // pid实现
     pTmp = kp * err[i][0];
-    iTmp[i] += err[i][0];
+    iTmp[i] += ki * err[i][0];
     dTmp = kd * dBuf[i][0];
 
     iTmp[i] = (iTmp[i] > imax ? imax : iTmp[i]);
     iTmp[i] = (iTmp[i] < (-imax) ? (-imax) : iTmp[i]);
 
     Tmp = pTmp + dTmp + iTmp[i];
-    // Tmp = Tmp * 10;
 
     Tmp = (Tmp > max ? max : Tmp);
     Tmp = (Tmp < (-max) ? (-max) : Tmp);
     // pTmp = pTmp * 10.0f;
+    // cout << err[0];
+
     // cout << curspd << ", ";
     // cout << pTmp << " ";
-    // cout << dTmp << " ";
+    // cout << iTmp[i] << " ";
+    // cout << dTmp << endl;
+
     // cout << Tmp << endl;
     // curcut += pTmp;
     return Tmp;
@@ -64,12 +57,18 @@ int pid::pidUpdate(int16_t curspd, int i)
 // int main()
 // {
 //     pid PID;
-//     PID.init_pid(0.5, 0, 0, 100, 0, 100);
+//     PID.init_pid(0.05, 0.5, 0.02, 400, 200, 200);
 //     int cur = 10;
 //     while (1)
 //     {
 //         sleep(1);
-//         cur = PID.pidUpdate(cur);
+//         cur = PID.pidUpdate(cur, 0);
+//         cout << cur << " ";
+//         cur = PID.pidUpdate(cur, 0);
+//         cout << cur << " ";
+//         cur = PID.pidUpdate(cur, 0);
+//         cout << cur << " ";
+//         cur = PID.pidUpdate(cur, 0);
 //         cout << cur << endl;
 //     }
 // }
