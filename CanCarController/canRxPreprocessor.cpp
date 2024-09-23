@@ -41,7 +41,6 @@ int canRxPreprocessor::reccheck(uint64_t curtick)
     }
     else
     {
-        cout << "Rx Can Err." << endl;
         Lasttick = curtick;
         return 0;
     }

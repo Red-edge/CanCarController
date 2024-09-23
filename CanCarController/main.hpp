@@ -8,7 +8,6 @@
 #include "pid.hpp"
 #include "controller.hpp"
 #include <iostream>
-#include <thread>
 
 int heartbeat;
 int canRxflag;

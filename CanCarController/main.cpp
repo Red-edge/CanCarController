@@ -45,42 +45,50 @@ int main()
     {
         // a.detach();
         uint64_t tmptick = tick.gettick();
+
+        // Heartbeat心跳脉冲包，调试用
         if ((tmptick - tmplstick) >= 500)
         {
             cout << "Heartbeat 500ms Count " << heartbeat << ". Lasted " << (tmptick - tmplstick) << endl;
             heartbeat++;
-            // can_frame tmp = m2006.m2006Update();
-            // memcpy(canTx.tx_tmp, tmp.data, 8);
             tmplstick = tmptick;
         }
+
         // Tx处理部
         if ((tmptick - canTx.Lasttick) >= tick.motorfrate)
         {
             // keyBoard = scanKeyboard();
             // cout << keyBoard << endl;
             m2006.m2006Update();
-            // cout << endl;
             memcpy(canTx.tx_tmp, m2006.m2006txCan.data, 8);
             canTx.canNTx(tmptick);
-            // m2006.m2006Update();
         }
+
         // Rx处理部
         if ((tmptick - canRx.Lasttick) >= 1)
         {
 
             canRxflag = canRx.reccheck(tmptick);
-            if (canRxflag == 0)
+            switch (canRxflag)
             {
+            case 0:
                 cout << "Rx err ..." << endl;
+                break;
+            case 1:
+                // cout << "Rx signal" << endl;
+                break;
+            case 2:
+                // cout << "Rx 0x200, omit" << endl;
+                break;
+
+            default:
+                cout << "Unexpected Rx err ..." << endl;
+                break;
             }
-            // else if (canRxflag == 2)
+
+            // if (canRxflag == 0)
             // {
-            //     cout << "Rx 0x200, omit" << endl;
-            // }
-            // else if (canRxflag == 1)
-            // {
-            //     count++;
-            //     cout << count << endl;
+            //     cout << "Rx err ..." << endl;
             // }
         }
     }
