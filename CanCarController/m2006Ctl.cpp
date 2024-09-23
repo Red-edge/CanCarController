@@ -17,7 +17,7 @@ void m2006Ctl::m2006Init(struct can_frame *m2006rx) // 用于重定位指针
     memset(_tgtcur, 0, sizeof(_tgtcur));
     m2006rxCan = m2006rx; // 将rx_frame的指针传递到电机初始化中，从而后续在使用时无需再复制内存
 
-    m2006pid.init_pid(0.05f, 1.0f, 0.03f, 2000.0f, 500.0f, 1000);
+    m2006pid.init_pid(1.0f, 0.1f, 0.5f, 500.0f, 200.0f, -300);
 
     m2006txCan.can_dlc = 8;
     m2006txCan.can_id = 0x200;
@@ -28,7 +28,7 @@ void m2006Ctl::m2006Update()
 {
     for (int j = 0; j < 4; j++)
     {
-        int16_t curspd = ((char)(m2006rxCan[j].data[2]) << 8) | (char)(m2006rxCan[j].data[3]);
+        int16_t curspd = ((char)(m2006rxCan[j].data[4]) << 8) | (char)(m2006rxCan[j].data[5]);
         _tgtcur[j] = m2006pid.pidUpdate(curspd, j);
 
         m2006txTmp[(2 * j)] = (char)((int16_t)_tgtcur[j] >> 8);       // 提取高八位

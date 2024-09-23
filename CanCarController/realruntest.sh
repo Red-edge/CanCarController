@@ -1,6 +1,7 @@
 #! /usr/bin/bash
 # echo `date`
 
+bash killtest.sh
 
 gnome-terminal -- sudo ip link set can0 up type can bitrate 1000000
 
@@ -12,6 +13,6 @@ cd ./build
 cmake ..
 make
 
-gnome-terminal --geometry=80x25+700+400 --title "virtual-can-test(vc)" -- ./test 
+gnome-terminal --geometry=80x25+700+400 --title "real-can-test(can0)" -- ./test 
 
 cd ../
