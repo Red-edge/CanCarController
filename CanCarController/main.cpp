@@ -59,7 +59,7 @@ int main()
             // keyBoard = scanKeyboard();
             // cout << keyBoard << endl;
             m2006.m2006Update();
-            cout << endl;
+            // cout << endl;
             memcpy(canTx.tx_tmp, m2006.m2006txCan.data, 8);
             canTx.canNTx(tmptick);
             // m2006.m2006Update();
