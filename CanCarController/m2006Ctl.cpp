@@ -1,10 +1,10 @@
 /*
 
 Name:           m2006Ctl
-Version:        1.0.0
-Date:           24.9.21
+Version:        1.1.0
+Date:           24.9.24
 Developer:      Rededge
-Desc:           Process m2006 can msg and spd control, based on pid module
+Desc:           Process m2006 can msg and spd control, based on pid module, single current loop, dual loop tobedone
 
 */
 
@@ -37,33 +37,11 @@ void m2006Ctl::m2006Update()
         m2006txTmp[(2 * j)] = (char)((int16_t)_tgtcur[j] >> 8);       // 提取高八位
         m2006txTmp[(2 * j) + 1] = (char)((int16_t)_tgtcur[j] & 0xFF); // 提取低八位
 
-        // cout << curspd << " ,";//观测用
-        // cout << _tgtcur[j] << ". "; // 观测用
-        // cout << endl;               // 观测用
 
         // 更新Tx
         m2006txCan.data[2 * j] = m2006txTmp[2 * j];
         m2006txCan.data[2 * j + 1] = m2006txTmp[2 * j + 1];
 
-        // 用于观测txCan内容
-        // cout << int(m2006txCan.can_dlc) << endl;
-        // cout << m2006txCan.can_id << endl;
-        // for (int i = 0; i < 8; i++)
-        // {
-
-        //     cout << int(m2006txCan.data[i]) << " ";
-        // }
-        // cout << endl;
     }
     // cout << endl;
 }
-
-// int main()
-// {
-//     m2006Ctl m2006;
-//     struct can_frame tmp;
-//     tmp.can_dlc = 8;
-//     tmp.can_id = 0x200;
-//     memcpy(tmp.data, m2006.m2006rxTmp, 8);
-//     m2006.m2006Init(&tmp);
-// }

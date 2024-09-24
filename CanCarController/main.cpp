@@ -1,10 +1,10 @@
 /*
 
 Name:           main
-Version:        1.2.0
-Date:           24.9.20
+Version:        1.3.0
+Date:           24.9.24
 Developer:      Rededge
-Desc:           main function for program
+Desc:           main function for program, 6 module uploaded
 
 */
 #include "main.hpp"
