@@ -28,7 +28,8 @@ private:
 public:
     void m2006Init(struct can_frame *m2006rx);
     void m2006Update();
-    pid m2006pid;
+    pid m2006curpid;
+    pid m2006spdpid;
     int16_t _tgtcur[4];
     struct can_frame *m2006rxCan; // for 2006 rx tmp store and process from rx_frame
     struct can_frame m2006txCan;  // for 2006 tx tmp store and process to tx_frame

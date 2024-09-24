@@ -12,6 +12,14 @@ Desc:           For rc input and output process.
 
 using namespace std;
 
+void controller::init_Ctl(float *tgtspd, uint64_t *curtick)
+{
+    in = 0;
+    m2006spd = tgtspd;
+    this->curtick = curtick;
+    memset(keyFlagTime, 0, sizeof(keyFlagTime));
+}
+
 int controller::scanKeyboard()
 {
     //  struct termios
@@ -27,9 +35,7 @@ int controller::scanKeyboard()
     //  #define _HAVE_STRUCT_TERMIOS_C_ISPEED 1
     //  #define _HAVE_STRUCT_TERMIOS_C_OSPEED 1
     //    };
-    
-    struct termios new_settings;
-    struct termios stored_settings;
+
     tcgetattr(STDIN_FILENO, &stored_settings); // 获得stdin 输入
     new_settings = stored_settings;            //
     new_settings.c_lflag &= (~ICANON);         //
@@ -41,7 +47,49 @@ int controller::scanKeyboard()
     in = getchar();
 
     tcsetattr(STDIN_FILENO, TCSANOW, &stored_settings);
+
+    setKeyFlag();
     return in;
+}
+
+int controller::setKeyFlag()
+{
+    switch (in)
+    {
+    case 119: // w or W pressed
+    case 87:
+        memcpy(&keyFlagTime[0], curtick, sizeof(uint64_t));
+        break;
+    case 115: // s or S pressed
+    case 83:
+        memcpy(&keyFlagTime[1], curtick, sizeof(uint64_t));
+        break;
+        break;
+    case 97: // a or A pressed
+    case 67:
+        memcpy(&keyFlagTime[2], curtick, sizeof(uint64_t));
+        break;
+    case 100: // d or D pressed
+    case 68:
+        memcpy(&keyFlagTime[3], curtick, sizeof(uint64_t));
+        break;
+    default:
+        break;
+    }
+    return 0;
+}
+
+void controller::spdCtl()
+{
+    *m2006spd = 0;
+    if ((*curtick - keyFlagTime[0]) <= 500)
+    {
+        *m2006spd = +400;
+    }
+    if ((*curtick - keyFlagTime[1]) <= 500)
+    {
+        *m2006spd = -400;
+    }
 }
 
 // int main(int argc, char *argv[])

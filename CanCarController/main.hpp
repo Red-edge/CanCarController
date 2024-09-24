@@ -8,10 +8,14 @@
 #include "pid.hpp"
 #include "controller.hpp"
 #include <iostream>
+#include <fcntl.h>
+#include <unistd.h>
 
 int heartbeat;
 int canRxflag;
-int keyBoard;
-uint64_t tmplstick;
+int fcntlFlag;
+uint64_t tmptick;
+uint64_t tmplstick; // 启动时间
+std::thread::id threadid;
 
 #endif

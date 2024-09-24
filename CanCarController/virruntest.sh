@@ -20,6 +20,6 @@ cd ./build
 cmake ..
 make
 
-gnome-terminal --geometry=80x25+700+400 --title "virtual-can-test(vc)" -- ./test 
+gnome-terminal --geometry=80x25+700+400 --title "virtual-can-test(vc)"  -- ./test
 
 cd ../

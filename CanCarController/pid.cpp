@@ -39,6 +39,7 @@ int pid::pidUpdate(float curspd, int i)
 
     Tmp = (Tmp > max ? max : Tmp);
     Tmp = (Tmp < (-max) ? (-max) : Tmp);
+    Tmp = Tmp;
 
     // pid值反馈可视化
     // cout << i << ", ";
