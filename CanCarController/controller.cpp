@@ -81,15 +81,19 @@ int controller::setKeyFlag()
 
 void controller::spdCtl()
 {
-    *m2006spd = 0;
-    if ((*curtick - keyFlagTime[0]) <= 500)
-    {
-        *m2006spd = +400;
-    }
-    if ((*curtick - keyFlagTime[1]) <= 500)
-    {
-        *m2006spd = -400;
-    }
+
+    // if ((*curtick - keyFlagTime[0]) <= 500)
+    // {
+    //     *m2006spd = 200;
+    //     return;
+    // }
+    // if ((*curtick - keyFlagTime[1]) <= 500)
+    // {
+    //     *m2006spd = 200;
+    //     return;
+    // }
+    // *m2006spd = 0;
+    // return;
 }
 
 // int main(int argc, char *argv[])

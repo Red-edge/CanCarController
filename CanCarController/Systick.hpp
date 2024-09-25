@@ -24,7 +24,7 @@ public:
     {
         errtick = 0;
         _errtick = 0;
-        motorfrate = 100; // 别太块！电流高频波动可能损坏电机！！！
+        motorfrate = 1; // 别太块！电流高频波动可能损坏电机！！！
         init_tick();
     }
     ~Systick()

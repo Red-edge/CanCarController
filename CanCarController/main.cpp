@@ -79,9 +79,9 @@ int main()
                 cout << "Unexpected Rx err ..." << endl;
                 break;
             }
+            key.scanKeyboard();
         }
-        key.scanKeyboard();
-    }
+        }
 
     return 0;
 }

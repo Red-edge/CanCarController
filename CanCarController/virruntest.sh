@@ -3,7 +3,10 @@
 
 bash killtest.sh
 
-sudo modprobe vcan
+sudo -S modprobe vcan << EOF
+123
+EOF
+
 sudo ip link add dev vc type vcan
 sudo ip link set up vc
 
