@@ -1,5 +1,6 @@
 /*
 
+Program:        CanCarControllers
 Name:           controller
 Version:        1.0.0
 Date:           24.9.21
@@ -12,7 +13,7 @@ Desc:           For rc input and output process.
 
 using namespace std;
 
-void controller::init_Ctl(float *tgtspd, uint64_t *curtick)
+void controller::init_Ctl(float *tgtspd, int64_t *curtick)
 {
     in = 0;
     m2006spd = tgtspd;
@@ -58,20 +59,22 @@ int controller::setKeyFlag()
     {
     case 119: // w or W pressed
     case 87:
-        memcpy(&keyFlagTime[0], curtick, sizeof(uint64_t));
+        memcpy(&keyFlagTime[0], curtick, sizeof(int64_t));
+        // cout << "W pressed " << keyFlagTime[0] << endl;
         break;
     case 115: // s or S pressed
     case 83:
-        memcpy(&keyFlagTime[1], curtick, sizeof(uint64_t));
+        memcpy(&keyFlagTime[1], curtick, sizeof(int64_t));
+        // cout << "S pressed " << keyFlagTime[1] << endl;
         break;
         break;
     case 97: // a or A pressed
     case 67:
-        memcpy(&keyFlagTime[2], curtick, sizeof(uint64_t));
+        memcpy(&keyFlagTime[2], curtick, sizeof(int64_t));
         break;
     case 100: // d or D pressed
     case 68:
-        memcpy(&keyFlagTime[3], curtick, sizeof(uint64_t));
+        memcpy(&keyFlagTime[3], curtick, sizeof(int64_t));
         break;
     default:
         break;
@@ -84,15 +87,16 @@ void controller::spdCtl()
 
     // if ((*curtick - keyFlagTime[0]) <= 500)
     // {
-    //     *m2006spd = 200;
+    //     *m2006spd = 300;
     //     return;
     // }
     // if ((*curtick - keyFlagTime[1]) <= 500)
     // {
-    //     *m2006spd = 200;
+    //     *m2006spd = -300;
     //     return;
-    // }
-    // *m2006spd = 0;
+    // }   
+    // // cout << *m2006spd << endl;
+    // // *m2006spd = 0;
     // return;
 }
 

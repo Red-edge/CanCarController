@@ -1,3 +1,14 @@
+/*
+
+Program:        CanCarController
+Name:           pid
+Version:        1.0.0
+Date:           24.10.9
+Developer:      Rededge
+Desc:           pid calculation module
+
+*/
+
 #include "pid.hpp"
 
 using namespace std;

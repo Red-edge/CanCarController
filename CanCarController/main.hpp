@@ -14,8 +14,9 @@
 int heartbeat;
 int canRxflag;
 int fcntlFlag;
-uint64_t tmptick;
-uint64_t tmplstick; // 启动时间
+int64_t tmptick;
+int64_t tmplstick; // 启动时间
 std::thread::id threadid;
+char canname[8] = {};
 
 #endif

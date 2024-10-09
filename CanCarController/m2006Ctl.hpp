@@ -31,10 +31,10 @@ public:
     pid m2006curpid;
     pid m2006spdpid;
     int16_t _tgtcur[4];
-    struct can_frame *m2006rxCan; // for 2006 rx tmp store and process from rx_frame
+    struct can_frame *m2006rxCan; // for 2006 rx tmp pointer store and process from rx_frame
     struct can_frame m2006txCan;  // for 2006 tx tmp store and process to tx_frame
-    char m2006rxTmp[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-    char m2006txTmp[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    unsigned char m2006rxTmp[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    unsigned char m2006txTmp[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
     m2006Ctl(/* args */)
     {

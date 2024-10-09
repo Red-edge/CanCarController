@@ -1,5 +1,6 @@
 /*
 
+Program:        CanCarController
 Name:           CanRxPreprocessor
 Version:        1.1.0
 Date:           24.9.14
@@ -9,11 +10,13 @@ Desc:           Process the CAN RX and store them in cache; classes added, faile
 */
 #include "canRxPreprocessor.hpp"
 
-int canRxPreprocessor::reccheck(uint64_t curtick)
+int canRxPreprocessor::reccheck(int64_t curtick)
 {
 
     rxflag = 0;
-    rxcheck = read(sockfd, &rec_frame, sizeof(rec_frame)); // read怎么写的？是读取的can网络设备还是can信号情况？为什么信号会一直有？
+    rxcheck = read(sockfd, &rec_frame, sizeof(rec_frame));
+    // read怎么写的？是读取的can网络设备还是can信号情况？为什么信号会一直有？
+    // 读取了相应网络接口的套接字信息
     if (rxcheck > 0)
     {
         Lasttick = curtick;
@@ -48,17 +51,18 @@ int canRxPreprocessor::reccheck(uint64_t curtick)
     return 0;
 }
 
-void canRxPreprocessor::Init_canRx(const char *canname, uint64_t curtick)
+void canRxPreprocessor::Init_canRx(const char *canname, int64_t curtick)
 {
 
     sockfd = socket(PF_CAN, SOCK_RAW, CAN_RAW);
-    if (0 > socket(PF_CAN, SOCK_RAW, CAN_RAW))
+    cout << "Rx sockfd " << sockfd << endl;
+    if (0 > sockfd)
     {
         perror("socket error");
         exit(EXIT_FAILURE);
     }
 
-    strcpy(ifr.ifr_name, canname); // 指定名字，注意改掉名字
+    strcpy(ifr.ifr_name, canname); // 指定名字，注意改掉名字，这里之后可能写成一个读取列表的
 
     if (ioctl(sockfd, SIOCGIFINDEX, &ifr) == -1)
     {
@@ -81,4 +85,5 @@ void canRxPreprocessor::Init_canRx(const char *canname, uint64_t curtick)
     }
 
     Lasttick = curtick;
+    cout << "Init canRx success!" << endl;
 }

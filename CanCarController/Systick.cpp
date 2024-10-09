@@ -1,5 +1,6 @@
 /*
 
+Program:        CanCarController
 Name:           Systick
 Version:        1.1.0
 Date:           24.9.14
@@ -17,9 +18,9 @@ void Systick::init_tick()
     // cout << "Init complete at clock " << this->systick.count() << endl;
 }
 
-uint64_t Systick::gettick()
+int64_t Systick::gettick()
 {
-    chrono::milliseconds curtick;
+    auto curtick = chrono::milliseconds();
     curtick = std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::system_clock::now().time_since_epoch());
     errtick = curtick.count() - systick.count();
@@ -27,12 +28,11 @@ uint64_t Systick::gettick()
     // {
     //     cout << "Get current running time " << errtick << endl;
     //     _errtick = errtick;
-        
+
     // }
     // Systick::~Systick();
     return errtick;
 }
-
 
 // int main()
 // {

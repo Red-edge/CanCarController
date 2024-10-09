@@ -19,8 +19,8 @@ public:
     float err[4][3];
     float dBuf[4];
 
-    int pTmp;
-    int iTmp[4];
+    float pTmp;
+    float iTmp[4];
     float dTmp;
     float Tmp;
 

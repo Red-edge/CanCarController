@@ -15,16 +15,16 @@ private:
     std::chrono::milliseconds systick;
 
 public:
-    uint64_t errtick;
-    uint64_t _errtick;
-    uint64_t gettick();
+    int64_t errtick;
+    int64_t _errtick;
+    int64_t gettick();
     void init_tick();
     int motorfrate;
     Systick()
     {
         errtick = 0;
         _errtick = 0;
-        motorfrate = 1; // 别太块！电流高频波动可能损坏电机！！！
+        motorfrate = 1; 
         init_tick();
     }
     ~Systick()

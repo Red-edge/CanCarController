@@ -1,5 +1,6 @@
 /*
 
+Program:        CanCarController
 Name:           main
 Version:        1.3.0
 Date:           24.9.24
@@ -13,21 +14,20 @@ using namespace std;
 
 int main()
 {
+    // All bags init
     Systick tick;
     canTxProcessor canTx;
     canRxPreprocessor canRx;
     m2006Ctl m2006;
     controller key;
 
+    cout << "Init with current available can name : ";
+    cin >> canname;
+
     heartbeat = 0;
     canRxflag = 0;
     fcntlFlag = fcntl(STDIN_FILENO, F_GETFL, 0);
-    tmplstick = tick.gettick();
-    tmptick = tick.gettick();
-
-    char canname[8] = {};
-    cout << "Init with current available can name : ";
-    cin >> canname;
+    tmplstick = tmptick = tick.gettick();
 
     canTx.init_canTx(canname, tick.gettick());
     canRx.Init_canRx(canname, tick.gettick());
@@ -58,7 +58,7 @@ int main()
         {
             key.spdCtl();
             m2006.m2006Update();
-            memcpy(canTx.tx_tmp, m2006.m2006txCan.data, 8);
+            memcpy(canTx.tx_tmp, m2006.m2006txCan.data, sizeof(m2006.m2006txCan.data)); // 将经过PID处理的Tx覆写发送缓冲区
             canTx.canNTx(tmptick);
         }
 
@@ -73,6 +73,7 @@ int main()
                 break;
             case 1:
             case 2:
+                // cout << "Rx 0x200 response, ign." << endl;
                 break;
 
             default:
@@ -81,7 +82,7 @@ int main()
             }
             key.scanKeyboard();
         }
-        }
+    }
 
     return 0;
 }

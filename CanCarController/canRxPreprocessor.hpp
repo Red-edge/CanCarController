@@ -39,8 +39,8 @@ public:
     int count_s;
     int count_f;
     int Lasttick;
-    int reccheck(uint64_t curtick);
-    void Init_canRx(const char *canname, uint64_t curtick);
+    int reccheck(int64_t curtick);
+    void Init_canRx(const char *canname, int64_t curtick);
     canRxPreprocessor(/* args */)
     {
         rxcheck = 0;
