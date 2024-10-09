@@ -85,19 +85,48 @@ int controller::setKeyFlag()
 void controller::spdCtl()
 {
 
-    // if ((*curtick - keyFlagTime[0]) <= 500)
+    // for (int i = 0; i < 4; i++)
     // {
-    //     *m2006spd = 300;
-    //     return;
+    //     cout << m2006spd[i] << " ";
     // }
-    // if ((*curtick - keyFlagTime[1]) <= 500)
+    // cout << endl;
+    if ((*curtick - keyFlagTime[0]) <= 500)
+    {
+        m2006spd[0] = 500.0f;
+        m2006spd[1] = -500.0f;
+        // cout << *m2006spd << endl;
+        return;
+    }
+    if ((*curtick - keyFlagTime[1]) <= 500)
+    {
+        m2006spd[0] = -500.0f;
+        m2006spd[1] = 500.0f;
+        // cout << *m2006spd << endl;
+        return;
+    }
+    if ((*curtick - keyFlagTime[2]) <= 500)
+    {
+        m2006spd[0] = 500.0f;
+        m2006spd[1] = -300.0f;
+        // cout << *m2006spd << endl;
+        return;
+    }
+    if ((*curtick - keyFlagTime[3]) <= 500)
+    {
+        m2006spd[0] = 300.0f;
+        m2006spd[1] = -500.0f;
+        // cout << *m2006spd << endl;
+        return;
+    }
+    // else
     // {
-    //     *m2006spd = -300;
-    //     return;
-    // }   
-    // // cout << *m2006spd << endl;
-    // // *m2006spd = 0;
-    // return;
+    //     *m2006spd = 0;
+    // }
+    // cout << *m2006spd << endl;
+    m2006spd[0] = 0.0f;
+    m2006spd[1] = 0.0f;
+
+    return;
 }
 
 // int main(int argc, char *argv[])

@@ -32,7 +32,7 @@ int main()
     canTx.init_canTx(canname, tick.gettick());
     canRx.Init_canRx(canname, tick.gettick());
     m2006.m2006Init(canRx.rx_frame);
-    key.init_Ctl(&m2006.m2006curpid.tgtspd, &tmptick);
+    key.init_Ctl(&m2006.m2006curpid.tgtspd[0], &tmptick);
     fcntl(STDIN_FILENO, F_SETFL, fcntlFlag | O_NONBLOCK);
 
     cout << "Align canTx clock at " << canTx.Lasttick << endl;
@@ -46,12 +46,12 @@ int main()
         tmptick = tick.gettick();
 
         // Heartbeat心跳脉冲包，调试用
-        if ((tmptick - tmplstick) >= 500)
-        {
-            cout << "Heartbeat 500ms Count " << heartbeat << ". Lasted " << (tmptick - tmplstick) << endl;
-            heartbeat++;
-            tmplstick = tmptick;
-        }
+        // if ((tmptick - tmplstick) >= 500)
+        // {
+        //     cout << "Heartbeat 500ms Count " << heartbeat << ". Lasted " << (tmptick - tmplstick) << endl;
+        //     heartbeat++;
+        //     tmplstick = tmptick;
+        // }
 
         // Tx处理部
         if ((tmptick - canTx.Lasttick) >= tick.motorfrate)

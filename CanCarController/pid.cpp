@@ -20,7 +20,11 @@ void pid::init_pid(float p, float i, float d, float max, float imax, float tgtsp
     kd = d;
     this->max = max;
     this->imax = imax;
-    this->tgtspd = tgtspd;
+    for (int i = 0; i < 4; i++)
+    {
+        this->tgtspd[i] = tgtspd;
+    }
+
     pTmp = 0;
     memset(iTmp, 0, sizeof(iTmp));
     dTmp = 0;
@@ -34,7 +38,7 @@ int pid::pidUpdate(float curspd, int i)
     // 累值传递
     err[i][2] = err[i][1];
     err[i][1] = err[i][0];
-    err[i][0] = tgtspd - curspd;
+    err[i][0] = tgtspd[i] - curspd;
 
     dBuf[i] = (err[i][0] - 2.0f * err[i][1] + err[i][2]);
 
@@ -64,6 +68,11 @@ int pid::pidUpdate(float curspd, int i)
 
     return Tmp;
 }
+
+// void pid::set_tgt_spd(float tgtspd, int i)
+// {
+//     init_pid(kp, ki, kd, max, imax, tgtspd);
+// }
 
 // int main()//测试使用
 // {
