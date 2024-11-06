@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/rededge/workspace/Personal-code/CanCarController/CanCarController",
-      "program": "/home/rededge/workspace/Personal-code/CanCarController/CanCarController/build/Debug/outDebug",
+      "cwd": "/home/rededge/workspace/Personal-code/CanCarController/CanCarController/test",
+      "program": "/home/rededge/workspace/Personal-code/CanCarController/CanCarController/test/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

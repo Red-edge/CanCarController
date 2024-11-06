@@ -32,7 +32,7 @@ int main()
     canTx.init_canTx(canname, tick.gettick());
     canRx.Init_canRx(canname, tick.gettick());
     m2006.m2006Init(canRx.rx_frame);
-    key.init_Ctl(&m2006.m2006curpid.tgtspd[0], &tmptick);
+    key.init_Ctl(&m2006.m2006balpid.tgtspd[0], &tmptick);
     fcntl(STDIN_FILENO, F_SETFL, fcntlFlag | O_NONBLOCK);
 
     cout << "Align canTx clock at " << canTx.Lasttick << endl;

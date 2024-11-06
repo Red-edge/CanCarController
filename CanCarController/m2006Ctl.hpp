@@ -18,6 +18,7 @@
 #include <thread>
 #include <errno.h>
 #include "pid.hpp"
+#include "mpu6050.hpp"
 
 using namespace std;
 
@@ -28,9 +29,13 @@ private:
 public:
     void m2006Init(struct can_frame *m2006rx);
     void m2006Update();
-    pid m2006curpid;
+    pid m2006balpid;
     pid m2006spdpid;
+    MPU6050 mpu;
+
     int16_t _tgtcur[4];
+    int16_t _tgtbal = 0;
+    int16_t curspd = 0;
     struct can_frame *m2006rxCan; // for 2006 rx tmp pointer store and process from rx_frame
     struct can_frame m2006txCan;  // for 2006 tx tmp store and process to tx_frame
     unsigned char m2006rxTmp[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
