@@ -11,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/test.dir/m2006Ctl.cpp.o.d"
   "CMakeFiles/test.dir/main.cpp.o"
   "CMakeFiles/test.dir/main.cpp.o.d"
+  "CMakeFiles/test.dir/mpu6050.cpp.o"
+  "CMakeFiles/test.dir/mpu6050.cpp.o.d"
   "CMakeFiles/test.dir/pid.cpp.o"
   "CMakeFiles/test.dir/pid.cpp.o.d"
   "test"

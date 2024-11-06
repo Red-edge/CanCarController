@@ -36,12 +36,15 @@ public:
     int16_t _tgtcur[4];
     int16_t _tgtbal = 0;
     int16_t curspd = 0;
+    int16_t ax = 0;
+    int16_t ay = 0;
+    int16_t az = 0;
     struct can_frame *m2006rxCan; // for 2006 rx tmp pointer store and process from rx_frame
     struct can_frame m2006txCan;  // for 2006 tx tmp store and process to tx_frame
     unsigned char m2006rxTmp[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     unsigned char m2006txTmp[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-    m2006Ctl(/* args */)
+    m2006Ctl()
     {
     }
     ~m2006Ctl() {}
