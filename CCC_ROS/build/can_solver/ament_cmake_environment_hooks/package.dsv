@@ -1,4 +1,0 @@
-source;share/can_solver/local_setup.bash
-source;share/can_solver/local_setup.dsv
-source;share/can_solver/local_setup.sh
-source;share/can_solver/local_setup.zsh
