@@ -1,4 +1,4 @@
-# Install script for directory: /home/rededge/workspace/CanCarController/CanCarController
+# Install script for directory: /home/rededge/workspace/Personal-code/CanCarController/CanCarController
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/rededge/workspace/CanCarController/CanCarController/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/rededge/workspace/Personal-code/CanCarController/CanCarController/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -1,3 +1,14 @@
+/*
+
+Program:        mpu6050
+Name:           mpu6050
+Version:        1.0.0
+Date:           24.11.20
+Developer:      Rededge
+Desc:           Read mpu6050 gyro from i2c connection
+
+*/
+
 #ifndef MPU6050_HPP
 #define MPU6050_HPP
 
@@ -47,7 +58,7 @@ public:
         uint8_t buf[2] = {PWR_MGMT_1, 0}; // 向 PWR_MGMT_1 寄存器写 0，解除复位
         if (write(file, buf, 2) != 2)
         {
-            std::cerr << "Failed to initialize MPU6050" << std::endl;
+            std::cerr << "Failed to initialize MPU6050, stop using MPU6050" << std::endl;
             return false;
         }
 

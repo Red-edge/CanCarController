@@ -38,7 +38,8 @@ int pid::pidUpdate(float curspd, int i)
     // 累值传递
     err[i][2] = err[i][1];
     err[i][1] = err[i][0];
-    err[i][0] = tgtspd[i] - curspd;
+    // err[i][0] = tgtspd[i] - curspd;
+    err[i][0] = curspd; //在这里不应该传入一个值，而应该直接传入误差，暂时在m2006ctl里简单修改了，后续优化
 
     dBuf[i] = (err[i][0] - 2.0f * err[i][1] + err[i][2]);
 
