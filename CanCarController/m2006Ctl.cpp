@@ -30,44 +30,51 @@ void m2006Ctl::m2006Init(struct can_frame *m2006rx) // 用于重定位指针
 
 void m2006Ctl::m2006Update(uint64_t curtick)
 {
-    if (mpuLife != 0 && flagSharp == false)
+    // if (mpuLife != 0)
+
     {
-        m2006spdpid.set_tgt_spd(0, 0);
-        m2006spdpid.set_tgt_spd(0, 1);
-        mpu.readAccelerometer(gx, gy, gz);
-        flagSharp = mpu.sharpChange(gx);
-        ptick = curtick;
-        cout << gx << " " << gy << " " << gz << endl;
-    }else{
-
-
-        if(curtick - ptick < 2000)
+        if (flagSharp == false)
         {
-        m2006spdpid.set_tgt_spd(1000, 0);//指定电机编号，用于设定电机速度
-        m2006spdpid.set_tgt_spd(1000, 1);
-        cout<<"sb"<<endl;
-        }
-
-        if(2000 < curtick - ptick < 4000)
-        {
-        m2006spdpid.set_tgt_spd(0, 0);//指定电机编号，用于设定电机速度
-        m2006spdpid.set_tgt_spd(1000, 1);
-        cout<<"dsb"<<endl;
-        }
-
-
-        if(curtick - ptick > 9000)
-        {
-            flagSharp = false;
+            m2006spdpid.set_tgt_spd(0, 0);
+            m2006spdpid.set_tgt_spd(0, 1);
             mpu.readAccelerometer(gx, gy, gz);
-            cout<<"dddd"<<endl;
+            flagSharp = mpu.sharpChange(gx);
+            ptick = curtick;
+            cout << gx << " " << gy << " " << gz << endl;
+            // flagSharp = true;
         }
+        else
+        {
+            if (curtick - ptick < 2000)
+            {
+                m2006spdpid.set_tgt_spd(1000, 0); // 指定电机编号，用于设定电机速度
+                m2006spdpid.set_tgt_spd(0, 1);
+                cout << "sb" << endl;
+            }
 
+            if ((2000 < curtick - ptick) && (curtick - ptick < 4000))
+            {
+                m2006spdpid.set_tgt_spd(0, 0); // 指定电机编号，用于设定电机速度
+                m2006spdpid.set_tgt_spd(1000, 1);
+                cout << "dsb" << endl;
+            }
 
+            if ((4000 < curtick - ptick) && (curtick - ptick < 9000))
+            {
+                m2006spdpid.set_tgt_spd(1000, 0); // 指定电机编号，用于设定电机速度
+                m2006spdpid.set_tgt_spd(1000, 1);
+                cout << "ddsb" << endl;
+            }
 
+            if (curtick - ptick > 9000)
+            {
+                flagSharp = false;
+                mpu.readAccelerometer(gx, gy, gz);
+                cout << "dddd" << endl;
+            }
+        }
     }
 
-    
     for (int j = 0; j < 4; j++)
     {
         // m2006spdpid.init_pid(0.85f, 0.01f, 1.0f, 1000.0f, 200.0f, m2006curpid.tgtspd[j]);
