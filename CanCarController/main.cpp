@@ -57,7 +57,7 @@ int main()
         if ((tmptick - canTx.Lasttick) >= tick.motorfrate)
         {
             key.spdCtl();
-            m2006.m2006Update();
+            m2006.m2006Update(tick.gettick());
             memcpy(canTx.tx_tmp, m2006.m2006txCan.data, sizeof(m2006.m2006txCan.data)); // 将经过PID处理的Tx覆写发送缓冲区
             canTx.canNTx(tmptick);
         }

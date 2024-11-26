@@ -70,10 +70,12 @@ int pid::pidUpdate(float curspd, int i)
     return Tmp;
 }
 
-// void pid::set_tgt_spd(float tgtspd, int i)
-// {
-//     init_pid(kp, ki, kd, max, imax, tgtspd);
-// }
+void pid::set_tgt_spd(float tgtspd, int i)
+{
+    // init_pid(kp, ki, kd, max, imax, tgtspd);
+    this->tgtspd[i] = tgtspd;
+    // cout<< this->tgtspd[i]<<endl;
+}
 
 // int main()//测试使用
 // {

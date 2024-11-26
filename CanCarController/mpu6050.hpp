@@ -20,12 +20,15 @@ Desc:           Read mpu6050 gyro from i2c connection
 #include <string>
 #include <cstdint>
 
+using namespace std;
+
 class MPU6050
 {
 public:
     // 构造函数：传入 I2C 设备文件路径
     // MPU6050(const std::string& device) : file(-1), device(device) {};
     MPU6050(const std::string &device = "/dev/i2c-1") : file(-1), device(device) {} // Default device path
+    int16_t pGx;
 
     // 析构函数：关闭 I2C 设备
     ~MPU6050()
@@ -86,11 +89,22 @@ public:
         }
 
         // 将高低字节组合成 16 位数据
+        pGx = ax;
         ax = (data[0] << 8) | data[1];
         ay = (data[2] << 8) | data[3];
         az = (data[4] << 8) | data[5];
 
         return true;
+    }
+
+    bool sharpChange(int16_t &ax)
+    {
+        if(abs(pGx - ax) > 30000)
+        {
+            // cout<<pGx - ax<<endl;
+            return 1;
+        }
+        return 0;
     }
 
 private:
